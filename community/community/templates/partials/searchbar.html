@@ -1,0 +1,4 @@
+<form id="search_form" hx-post="{% url 'search' %}" hx-trigger="submit" hx-target="#results-list" _="on submit take .btn_on for #all ">
+    {% csrf_token %}
+    <input id="search_bar" name="zipcode" type="search" hx-post="{% url 'clear_search' %}" hx-target="#search_area" title="Search Zipcode" placeholder="Enter zipcode here">
+</form>

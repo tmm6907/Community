@@ -1,0 +1,30 @@
+{% if queryset %}
+    <div class="card-container" _="on load onSmallScreen()">
+        <div class="result-count">{{ queryset|length }} items - {{ zipcode }}</div>
+        {% for place in queryset %}
+            <div class='place_card' _="on click toggle .truncateTitle on .place_name">
+                <div class="place_info">
+                    <h2 class='place_name'>{{ place.name }}</h2>
+                    <p class='place_addr'>{{ place.formatted_address|cut:', United States' }}</p>
+                    <p class='place_phone'>{{ place.phone_number|default_if_none:'' }}</p>
+                    <a href='https://www.google.com/maps/place?q={{ place.formatted_address }}' class='place_url'>Find directions</a>
+                </div>
+                <div>
+                    <img class="place_photo" src='https://maps.googleapis.com/maps/api/place/photo?photo_reference={{ place.photos }}&maxwidth=150&maxheight=150&key=AIzaSyB1uRbcmzEL5PkkpOZandFVDLch4iyM_UU' alt='image of {{ place.name }}'></img>
+                </div>
+                <div class='place_detail'>
+                    {% if place.category == 'mental health service' or place.category == 'emergency service' %}
+                        <span class='place_category'>{{ place.category|cut:' service'|title }}</span>
+                    {% elif place.category == 'public transportation' %}
+                        <span class='place_category'>{{ place.category|cut:'ation'|title }}</span>
+                    {% else %}
+                        <span class='place_category'>{{ place.category|title }}</span>
+                    {% endif %}
+                    <span class="place_rating">&#9734; {{ place.rating|default_if_none:'' }}</span>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <div class="no_places">No Items Found</div>
+{% endif %}
