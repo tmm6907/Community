@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8080
+    ports:
+      - 8000:8000
+
+    environment:
+      - PYTHONUNBUFFERED=1
+      - PLACES_API_KEY=AIzaSyB1uRbcmzEL5PkkpOZandFVDLch4iyM_UU
