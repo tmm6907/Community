@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<nav>
+    <div id="nav" hx-target="#results-list" _="on htmx:afterOnLoad take .btn_on for event.target">
+        <a hx-get="{% url 'search' %}" hx-target="#results-list" class="nav_btn btn_on" title="All" alt="All" id="all">All</a>
+        <a hx-get="{% url 'category' category='grocery store' %}" hx-target="#results-list" class="nav_btn" title="Groceries" alt="Groceries">Groceries</a>
+        <a hx-get="{% url 'category' category='bank' %}" hx-target="#results-list" class="nav_btn" title="Banks" alt="Banks">Banks</a>
+        <a hx-get="{% url 'category' category='health care' %}" hx-target="#results-list" class="nav_btn" title="Health Care" alt="Health Care">Health Care</a>
+        <a hx-get="{% url 'category' category='mental health service' %}" hx-target="#results-list" class="nav_btn" title="Mental Health" alt="Mental Health">Mental Health</a>
+        <a hx-get="{% url 'category' category='public transportation' %}" hx-target="#results-list" class="nav_btn" title="Public Transport" alt="Public Transport">Public Transport</a>
+        <a hx-get="{% url 'category' category='park' %}" hx-target="#results-list" class="nav_btn" title="Parks & Trails" alt="Parks and Trails">Parks & Trails</a>
+        <a hx-get="{% url 'category' category='mail and shipping' %}" hx-target="#results-list" class="nav_btn" title="Mail & Shipping" alt="Mail and Shipping">Mail & Shipping</a>
+    </div>
+</nav>
+<div id="results-list">{% include 'partials/results_list.html' %}</div>
+<!-- <button _="on click show .request-form" id="fab">Request Service</button> -->
+<div class="request-form"></div>
+
+{% endblock %}
